@@ -1,0 +1,9 @@
+---
+- version: v1alpha1
+  group: etcd.sample-etcd.com
+  kind: Etcd
+  chart: helm-charts/etcd
+  overrideValues:
+    image.repository: $MY_IMAGE
+    image.tag: $MY_TAG
+

@@ -1,0 +1,24 @@
+affinity: {}
+auth:
+  client:
+    enableAuthentication: false
+    secureTransport: false
+  peer:
+    enableAuthentication: false
+    secureTransport: false
+    useAutoTLS: false
+clientPort: 2379
+component: etcd
+extraEnv: []
+image:
+  pullPolicy: IfNotPresent
+  repository: replaced
+  tag: replaced
+memoryMode: false
+nodeSelector: {}
+peerPort: 2380
+persistentVolume:
+  enabled: false
+replicas: 3
+resources: {}
+tolerations: []
