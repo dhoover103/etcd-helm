@@ -11,9 +11,8 @@ clientPort: 2379
 component: etcd
 extraEnv: []
 image:
+  image: image
   pullPolicy: IfNotPresent
-  repository: replaced
-  tag: replaced
 memoryMode: false
 nodeSelector: {}
 peerPort: 2380

@@ -29,7 +29,5 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "ectd-helm"
-            - name: MY_IMAGE
-              value: k8s.gcr.io/etcd-amd64
-            - name: MY_TAG
-              value: 3.2.26
+            - name: RELATED_IMAGE_STATEFULSET
+              value: k8s.gcr.io/etcd-amd64:3.2.26
