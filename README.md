@@ -11,6 +11,20 @@ Make sure your Helm chart only references the values file for images. Each image
         image: "{{ .Values.image.image }}"
         imagePullPolicy: "{{ .Values.image.pullPolicy }}"
 
+A great way to find all the parts of your helm chart that will need to be updated is to recursively search your project's template folder for "image:"
+
+    $ grep -r 'image:' ./helm-charts/etcd/templates/*
+      ./helm-charts/etcd/templates/statefulset.yaml:        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+Here we see that the image is split into two values - repository and tag. This won't work because we need to have a single variable to override. Replace this line with a new, single variable:
+
+    $ grep -r 'image:' ./helm-charts/etcd/templates/*
+      ./helm-charts/etcd/templates/statefulset.yaml:        image: "{{ .Values.image.image }}"
+
+Don't forget to add this new value to your Values.yaml file!
+
+## Override the image variable
+
 In the watches.yaml file, add a field for overrideValues. It should contain each image value, should be set to an environment variable
 
   overrideValues:
@@ -20,7 +34,7 @@ NOTE: the variable name MUST follow the pattern RELATED_IMAGE_<identifier>. Ther
 
 Using operator-sdk version 0.14.0 or later, build the updated operator image.
 
-Define the environment variables in the operator container. In the CSV and operator.yaml, declare the variable and set it to a default value.
+Define the environment variables in the operator container and CSV. Declare the variable and set it to a default value.
 
           env:
             - name: RELATED_IMAGE_STATEFULSET
